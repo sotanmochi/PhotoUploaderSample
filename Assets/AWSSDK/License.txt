@@ -1,0 +1,2 @@
+Apache License 2.0
+https://aws.amazon.com/jp/apache-2-0/
