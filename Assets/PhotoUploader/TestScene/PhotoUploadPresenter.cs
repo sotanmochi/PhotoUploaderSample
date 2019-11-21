@@ -75,9 +75,6 @@ namespace PhotoUploader
 
             _PhotoPreview.texture = preview;
             _PhotoPreviewUIRoot.SetActive(true);
-
-            RenderTexture.active = null;
-            Camera.main.targetTexture = null;
         }
 
         private async void OnClickSaveImage()
