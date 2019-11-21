@@ -23,7 +23,6 @@ namespace PhotoUploader
         [SerializeField] private Button _Button_SaveCancel;
         [SerializeField] private Button _Button_QRCodeBack;
 
-        private RenderTexture _PreviewRT;
         private bool _IsPreview;
 
         private S3Storage _StorageClient;
@@ -60,18 +59,18 @@ namespace PhotoUploader
 
         private void TakePhoto()
         {
+            StartCoroutine(TakePhotoCoroutine());
+        }
+
+        IEnumerator TakePhotoCoroutine()
+        {
             _IsPreview = true;
 
-            _PreviewRT = new RenderTexture(Screen.width, Screen.height, 0, RenderTextureFormat.ARGB32);
-
-            Camera.main.targetTexture = _PreviewRT;
-            Camera.main.Render(); // Render camera manually
-
-            RenderTexture.active = _PreviewRT;
+            yield return new WaitForEndOfFrame();
 
             // Read pixels from screen(currently active RenderTexture) into the saved texture data.
-            Texture2D preview = new Texture2D(_PreviewRT.width, _PreviewRT.height, TextureFormat.ARGB32, false, false);
-            preview.ReadPixels(new Rect(0, 0, _PreviewRT.width, _PreviewRT.height), 0, 0);
+            Texture2D preview = new Texture2D(Screen.width, Screen.height, TextureFormat.ARGB32, false, false);
+            preview.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
             preview.Apply();
 
             _PhotoPreview.texture = preview;
