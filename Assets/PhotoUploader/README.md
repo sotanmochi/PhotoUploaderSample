@@ -2,8 +2,6 @@
 
 ARアプリで撮影した写真をAmazon S3にアップロードして画像のURLをQRコード表示するサンプル
 
-<img src="Images/SampleQR.png" width="50%">
-
 ## License
 このプロジェクトは、サードパーティのアセットを除き、CC0 Public Domainでライセンスされています。  
 This project is licensed under CC0 Public Domain except for third party assets.
